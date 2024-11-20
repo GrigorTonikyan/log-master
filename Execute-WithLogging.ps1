@@ -39,7 +39,7 @@ try {
             $output = & $Command 2>&1
         }
         $exitCode = $LASTEXITCODE
-        if ($exitCode -eq $null) { $exitCode = 0 }
+        if ($null -eq $exitCode) { $exitCode = 0 }
     }
     catch {
         $errorMessage = $_.Exception.Message
