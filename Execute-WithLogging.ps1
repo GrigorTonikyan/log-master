@@ -28,7 +28,7 @@ try {
     
     # Execute command and capture output
     $output = $null
-    $error = $null
+    $errorMessage = $null
     $exitCode = 0
     
     try {
@@ -42,19 +42,19 @@ try {
         if ($exitCode -eq $null) { $exitCode = 0 }
     }
     catch {
-        $error = $_.Exception.Message
+        $errorMessage = $_.Exception.Message
         $exitCode = 1
     }
     
     # Log command output
-    Write-CommandOutput -CommandId $cmdId -StdOut $output -StdErr $error -ExitCode $exitCode
+    Write-CommandOutput -CommandId $cmdId -StdOut $output -StdErr $errorMessage -ExitCode $exitCode
     
     # Return output if requested
     if ($PassThru) {
         return @{
             CommandId = $cmdId
             Output    = $output
-            Error     = $error
+            Error     = $errorMessage
             ExitCode  = $exitCode
         }
     }
